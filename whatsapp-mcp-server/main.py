@@ -1,3 +1,24 @@
+import subprocess
+import os
+import sys
+
+# Start Go server at the beginning
+try:
+    creationflags = 0
+    if sys.platform == "win32":
+        creationflags = subprocess.CREATE_NO_WINDOW
+
+    process = subprocess.Popen(
+        ["go", "run", "main.go"],
+        cwd=r"D:\whatsapp-mcp\whatsapp-bridge",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        creationflags=creationflags
+    )
+    print(f"Go server started in background with PID {process.pid}")
+except Exception as e:
+    print("An unexpected error occurred while starting Go server:", e)
+    
 from typing import List, Dict, Any, Optional
 from mcp.server.fastmcp import FastMCP
 from whatsapp import (
